@@ -12,7 +12,13 @@ module.exports = {
     // GET to get a single thought by its _id
     getSingleThought(req, res) {
         Thought.findOne({ _id: req.params.thoughtId })
-    }
+        .then((thought) => 
+        !thought
+            ? res.status(404).json({ message: "No thought found"})
+            : res.json(thought)
+        )
+        .catch((err) => res.status(500).json(err));
+    },
     // POST to create a new thought (don't forget to push the created thought's _id to the associated user's thoughts array field)
             // example data
             // {

@@ -42,10 +42,8 @@ module.exports = {
             .then((user) =>
                 !user
                     ? res.status(404).json({ message: "User not found" })
-                    : Thought.findOneandUpdate(
-                        { users: req.params.userId },
-                        { $pull: { users: req.params.userId }},
-                        { new: true }
+                    : Thought.deleteMany(
+                        { _id: { $in: user.thoughts }}
                     )
             )
             .then((thought) => 
@@ -65,7 +63,7 @@ module.exports = {
         console.log(req.body);
         User.findOneAndUpdate(
             { _id: req.params.userId },
-            { addToSet: { friends: req.body }},
+            { $addToSet: { friends: req.params.friendId }},
             { new: true }
         )
             .then((user) => 
@@ -78,7 +76,7 @@ module.exports = {
     removeFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
-            { $pull: { friends: { friendId: req.params.friendId }}},
+            { $pull: { friends:  req.params.friendId }},
             { runValidators: true, new: true }
         )
             .then((user) =>
