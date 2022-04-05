@@ -26,7 +26,27 @@ module.exports = {
             //     "username": "lernantino",
             //     "userId": "5edff358a0fcb779aa7b118b"
             // }
-
+   createThought(req, res) {
+       Thought.create(req.body)
+       .then((thought) => {
+           return User.findOneAndUpdate(
+               { _id: req.body.userId },
+               { $addToSet: { thoughts: thought._id }},
+               { new: true }
+           );
+       })
+       .then((user) =>
+            !user
+            ? res.status(404).json({
+                message: "Thought created, but no user found",
+            })
+            : res.json("Thought created!")
+        )
+       .catch((err) => {
+           console.log(err);
+           return res.status(500).json(err);
+       })
+   }
     // PUT to update a thought by its _id
 
     // DELETE to remove a thought by its _id
