@@ -1,4 +1,5 @@
 const User = require("../models/User"); 
+const Thought = require("../models/Thought");
 
 
 module.exports = {
@@ -9,7 +10,8 @@ module.exports = {
         },
     getSingleUser(req, res) {
         User.findOne({_id: req.params.userId })
-            .select("thoughts", "friends")
+            .select("thoughts")
+            .select("friends")
             .then((user) =>
                 !user
                     ? res.status(404).json({ message: "User not found"})
