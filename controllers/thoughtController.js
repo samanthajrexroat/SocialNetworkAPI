@@ -60,9 +60,26 @@ module.exports = {
             : res.json(thought)
         )
         .catch((err) => res.status(500).json(err));
-   }
+   },
     // DELETE to remove a thought by its _id
-
+   deleteThought(req, res) {
+       Thought.findOneAndRemove({ _id: req.params.thoughtId })
+        .then((thought) =>
+            !thought
+                ? res.status(404).json({ message: "Thought not found." })
+                : User.findOneAndUpdate(
+                    { thoughts: req.params.thoughtId },
+                    { $pull: { thoughts: req.params.thoughtId }},
+                    { new: true }
+                )
+        )
+        .then((user) =>
+            !user
+            ? res.status(404).json({ message: "Thought deleted, but user not found." })
+            : res.json({ message: "Thought successfully deleted."})
+        )
+        .catch((err) => res.status(500).json(err));    
+   }
     // /api/thoughts/:thoughtId/reactions
     // POST to create a reaction stored in a single thought's reactions array field
 
