@@ -46,9 +46,21 @@ module.exports = {
            console.log(err);
            return res.status(500).json(err);
        })
-   }
+   },
     // PUT to update a thought by its _id
-
+   updateThought(req, res) {
+       Thought.findOneAndUpdate(
+           { _id: req.params.thoughtId },
+           { $set: req.body },
+           { new: true}
+       )
+       .then((thought) =>
+       !thought
+            ? res.status(404).json({ message: "No thought found" })
+            : res.json(thought)
+        )
+        .catch((err) => res.status(500).json(err));
+   }
     // DELETE to remove a thought by its _id
 
     // /api/thoughts/:thoughtId/reactions
