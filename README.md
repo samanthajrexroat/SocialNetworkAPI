@@ -18,8 +18,7 @@ To install the API: <ol><li>Clone the repository to your local machine</li><li>R
 Use this back end to start a server and access a MongoDB using URL endpoints in an API client such as Insomnia.  Users can read, create, update, and delete data in the database by accessing these API enpoints.
 
 View a walk through video of the program here:
-* [Google Drive]()<br>
-<img src="">
+* [Google Drive](https://drive.google.com/file/d/1qBW2MpV3BFAwiunEj0DAtf2zYsVaeeqQ/view?usp=sharing)
 
 ## Contributing
 This application was completed using starter code provided by Trilogy Education and the University of Denver Boot Camps.
