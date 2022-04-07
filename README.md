@@ -12,7 +12,7 @@ An API for a social network web application where users can share their thoughts
 * [License](#license)
 
 ## Installation
-To install the API: <ol><li>Clone the repository to your local machine</li><li>Run 'npm install' in the command line to install the dependencies in package.json.</li><li>Run 'node server.js' in the command line.</li>Access the API Endpoints with an API client.<li></li></ol>
+To install the API: <ol><li>Clone the repository to your local machine</li><li>Run 'npm install' in the command line to install the dependencies in package.json.</li><li>Run 'node server.js' in the command line.</li><li>Access the API Endpoints with an API client.</li></ol>
 
 ## Usage
 Use this back end to start a server and access a MongoDB using URL endpoints in an API client such as Insomnia.  Users can read, create, update, and delete data in the database by accessing these API enpoints.
